@@ -19,15 +19,15 @@ public class Main {
                 .initializeLayers(layers, Initialization.HE_INITIALIZATION_NORMAL)
                 .setLearningRate(0.001)
                 .setGradientDescentMethod(GradientDescentType.STOCHASTIC)
-                .setActivationFunction(ActivationFunctions.ReLU)
-                .setOutputActivationFunction(ActivationFunctions.SOFTMAX)
+                .setActivationFunction(ActivationFunctions.SIGMOID)
+                .setOutputActivationFunction(ActivationFunctions.SIGMOID)
                 .build();
 
         //Network network = Network.loadNetwork("network1.json");
 
         TrainingSet trainingSet = buildTrainingSet("Set_1");
 
-        network.train(trainingSet, 100);
+        network.train(trainingSet, 50);
     }
 
     public static TrainingSet buildTrainingSet(String trainingSetPath)  {
