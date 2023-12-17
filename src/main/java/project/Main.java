@@ -13,21 +13,21 @@ public class Main {
     public static void main(String[] args) {
 
 
-        int[] layers = {784, 36, 36, 10};
+        int[] layers = {784, 32, 32, 40, 10};
 
         Network network = new Network.NetworkBuilder()
-                .initializeLayers(layers, Initialization.DEFAULT_RANDOM)
-                .setLearningRate(0.01)
+                .initializeLayers(layers, Initialization.HE_INITIALIZATION_NORMAL)
+                .setLearningRate(0.001)
                 .setGradientDescentMethod(GradientDescentType.STOCHASTIC)
-                .setActivationFunction(ActivationFunctions.SIGMOID)
-                .setOutputActivationFunction(ActivationFunctions.SIGMOID)
+                .setActivationFunction(ActivationFunctions.ReLU)
+                .setOutputActivationFunction(ActivationFunctions.SOFTMAX)
                 .build();
 
         //Network network = Network.loadNetwork("network1.json");
 
         TrainingSet trainingSet = buildTrainingSet("Set_1");
 
-        network.train(trainingSet, 500);
+        network.train(trainingSet, 100);
     }
 
     public static TrainingSet buildTrainingSet(String trainingSetPath)  {

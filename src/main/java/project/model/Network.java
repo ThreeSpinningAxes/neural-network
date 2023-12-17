@@ -1,5 +1,6 @@
 package project.model;
 
+import com.github.javafaker.Faker;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,7 +51,9 @@ public class Network implements Serializable {
     }
 
     public void saveNetwork()  {
-        String networkName = getRandomNum() + ".ser";
+        Faker faker = new Faker();
+
+        String networkName = "network";
 
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(SAVE_NETWORKS_PATH + networkName);
@@ -89,7 +92,7 @@ public class Network implements Serializable {
             trainStochasticDescent(trainingSet, epochs);
         }
         this.averageCostOfNetwork = this.averageCostOfNetwork / trainingSet.trainingExamples.size();
-        logger.info("Average cost of entire network: " + this.averageCostOfNetwork);
+        //logger.info("Average cost of entire network: " + this.averageCostOfNetwork);
     }
 
     public void test(TrainingSet trainingData, double errorMargin) {
@@ -115,7 +118,7 @@ public class Network implements Serializable {
 
     private void trainStochasticDescent(TrainingSet trainingSet, int epochs) {
         trainingSet.randomizeDataSet();
-        List<List<TrainingExample>> trainingBatches = trainingSet.batchTrainingData(150);
+        List<List<TrainingExample>> trainingBatches = trainingSet.batchTrainingData(256);
         for (int i = 0; i < epochs; i++) {
             for (List<TrainingExample> trainingBatch : trainingBatches) {
                 iteration(trainingBatch);
@@ -138,7 +141,7 @@ public class Network implements Serializable {
             costOfIteration += cost;
         }
         this.averageCostOfNetwork += costOfIteration / (double) trainingData.size();
-        logger.info("Average cost after completing batch: " + costOfIteration / (double) trainingData.size());
+        //logger.info("Average cost after completing batch: " + costOfIteration / (double) trainingData.size());
 
         this.averageWeightsBiasesAdjustments(trainingData.size());
 

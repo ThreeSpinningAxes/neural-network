@@ -28,7 +28,7 @@ public class TrainingSet {
     }
 
     public List<List<TrainingExample>> batchTrainingData(int batchSize) {
-        List<List<TrainingExample>> batches = ListUtils.partition(this.trainingExamples, 100);
+        List<List<TrainingExample>> batches = ListUtils.partition(this.trainingExamples, batchSize);
         return batches;
     }
 

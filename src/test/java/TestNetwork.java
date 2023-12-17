@@ -10,7 +10,7 @@ public final class TestNetwork {
 
     @Before
     public void init() {
-        this.setNetwork("0.195501797150752.ser");
+        this.setNetwork("network");
     }
 
 
